@@ -1,13 +1,9 @@
 #imports
-import datetime
-
 from flask import Flask, render_template, request
 import os
 import requests
 import html_to_json
 import json
-from dotenv import load_dotenv
-load_dotenv()
 
 #Flask app
 app = Flask(__name__)
@@ -25,7 +21,8 @@ def predict():
   print(columns)
   data_dict = dict(zip(columns,values))
   #url = "http://127.0.0.1:5000/predict"
-  url = "http://backend:5000/predict"
+  backend_host_port = os.environ.get("BACKEND_HOST_PORT")
+  url = f"http://backend:{backend_host_port}/predict"
   try:
     r = requests.post(url, data=data_dict)
     dict_output = json.loads(html_to_json.convert(r.content)['_value'])
@@ -49,8 +46,6 @@ def page_not_found(e):
   return render_template('404.html')
 
 if __name__=="__main__":
-  port = os.environ.get("$FRONTEND_DOCKER_PORT")
-  print(datetime.datetime.now())
-  print(port)
-  app.run(debug=False, host="0.0.0.0",port=port)
+  frontend_docker_port = os.environ.get("$FRONTEND_DOCKER_PORT")
+  app.run(debug=False, host="0.0.0.0",port=frontend_docker_port)
   #app.run(debug=True, port=port)

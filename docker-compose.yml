@@ -22,6 +22,7 @@ services:
     environment:
       - FRONTEND_HOST_PORT #this command makes the port variable available inside the Dockerfile
       - FRONTEND_DOCKER_PORT
+      - BACKEND_HOST_PORT
     #depends_on:
     #  - backend
     ports:
