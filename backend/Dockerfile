@@ -12,7 +12,7 @@ RUN pip install -r requirements.txt
 COPY . /backend
 
 #This command is just informative since it does not actually expose any port
-EXPOSE $BACKEND_HOST_PORT
+EXPOSE $BACKEND_DOCKER_PORT
 
 #CMD ["python","main.py"] #This is a development server. Do not use it in a production deployment.
 #ENTRYPOINT gunicorn --bind 0.0.0.0:$BACKEND_HOST_PORT main:app

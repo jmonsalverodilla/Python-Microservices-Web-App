@@ -49,8 +49,8 @@ def predict():
     return {'model_output':model_output, 'status':status}
 
 if __name__ == "__main__":
-    backend_docker_port = os.environ.get("BACKEND_DOCKER_PORT")
-    app.run(debug=False, host="0.0.0.0",port = backend_docker_port)
+    backend_port = os.environ.get("BACKEND_PORT")
+    app.run(debug=False, host="0.0.0.0",port = backend_port)
     #app.run(debug=True, port=port)
 
 

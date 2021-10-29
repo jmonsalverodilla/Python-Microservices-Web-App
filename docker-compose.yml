@@ -5,14 +5,14 @@ services:
     container_name: nginx
     build: nginx/
     ports:
-      - $NGINX_HOST_PORT:80
+      - $NGINX_HOST_PORT:$NGINX_DOCKER_PORT
     #volumes:
     #  - "/etc/timezone:/etc/timezone:ro"
     #  - "/etc/localtime:/etc/localtime:ro"
     # - static_volume:/home/app/web/project/static
     # - media_volume:/home/app/web/project/media
-    networks:
-      - frontend_network
+    #networks:
+    #  - frontend_network
     #depends_on:
     #  - frontend
 
@@ -20,15 +20,14 @@ services:
     container_name: frontend
     build: frontend/
     environment:
-      - FRONTEND_HOST_PORT #this command makes the port variable available inside the Dockerfile
-      - FRONTEND_DOCKER_PORT
-      - BACKEND_HOST_PORT
+      - FRONTEND_PORT
+      - BACKEND_PORT
     #depends_on:
     #  - backend
     ports:
-      - $FRONTEND_HOST_PORT:$FRONTEND_DOCKER_PORT #host port:4000; docker port:4000
-    networks:
-      - frontend_network
+      - $FRONTEND_PORT:$FRONTEND_PORT #host port:4000; docker port:4000
+    #networks:
+    #  - frontend_network
 
   backend:
     container_name: backend
@@ -42,10 +41,10 @@ services:
     links:
       - db:database  #db is reachable FROM BACKEND at the hostnames db and database
     ports:
-      - $BACKEND_HOST_PORT:$BACKEND_DOCKER_PORT #host port:5000; docker port:5000
-    networks:
-      - frontend_network
-      - backend_network
+      - $BACKEND_PORT:$BACKEND_PORT #host port:5000; docker port:5000
+    #networks:
+    #  - frontend_network
+    #  - backend_network
 
   db:
     container_name: postgresdb
@@ -62,14 +61,14 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - $POSTGRES_HOST_PORT:$POSTGRES_DB_PORT #host port:54333; docker port:5432
-    networks:
-      - backend_network
+    #networks:
+    #  - backend_network
 
 volumes:
   postgres_data:
 
-networks:
-  frontend_network:
-    driver: bridge
-  backend_network:
-    driver: bridge
+#networks:
+#  frontend_network:
+#    driver: bridge
+#  backend_network:
+#    driver: bridge
