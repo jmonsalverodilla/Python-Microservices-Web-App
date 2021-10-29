@@ -16,7 +16,7 @@ class Predictions(db.Model):
     YearBuilt = db.Column(db.Integer, nullable=True)
     KitchenQual = db.Column(db.Text, nullable=True)
     Prediction = db.Column(db.Text, nullable=True)
-    Time = db.Column(db.DateTime, default=datetime.now() + timedelta(hours=2))
+    Time = db.Column(db.DateTime, default=datetime.now) #datetime.now() + timedelta(hours=2) just get the time when the app is init
 
     def __repr__(self):
         return '<ID %r>' % self.id

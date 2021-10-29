@@ -50,7 +50,7 @@ def predict():
     return {'model_output':model_output, 'status':status}
 
 if __name__ == "__main__":
-    port = os.environ.get("BACKEND_HOST_PORT")
+    port = os.environ.get("BACKEND_DOCKER_PORT")
     app.run(debug=False, host="0.0.0.0",port = port)
     #app.run(debug=True, port=port)
 

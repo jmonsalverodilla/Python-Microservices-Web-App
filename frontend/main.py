@@ -49,7 +49,7 @@ def page_not_found(e):
   return render_template('404.html')
 
 if __name__=="__main__":
-  port = os.environ.get("FRONTEND_HOST_PORT")
+  port = os.environ.get("$FRONTEND_DOCKER_PORT")
   print(datetime.datetime.now())
   print(port)
   app.run(debug=False, host="0.0.0.0",port=port)
