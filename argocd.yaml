@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: house-prices-argo-application
+  name: house-prices-app-argocd
   namespace: argocd
 spec:
   project: default
@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/jmonsalverodilla/Python-Microservices-Web-App.git
     targetRevision: HEAD
-    path: /
+    path: deployment
   destination:
     server: https://kubernetes.default.svc
     namespace: house-prices-app
