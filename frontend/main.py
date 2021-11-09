@@ -21,8 +21,9 @@ def predict():
   print(columns)
   data_dict = dict(zip(columns,values))
   #url = "http://127.0.0.1:5000/predict"
+  host_name = os.environ.get("HOST_NAME")
   backend_port = os.environ.get("BACKEND_PORT")
-  url = f"http://backend:{backend_port}/predict"
+  url = f"http://{host_name}:{backend_port}/predict"
   try:
     r = requests.post(url, data=data_dict)
     dict_output = json.loads(html_to_json.convert(r.content)['_value'])
