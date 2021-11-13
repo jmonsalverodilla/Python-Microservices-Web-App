@@ -2,7 +2,7 @@
 
 The following gif shows how the app works:
 
-![](app.gif)
+![](demo.gif)
 
 
 ## Usage
