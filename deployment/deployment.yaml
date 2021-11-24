@@ -55,7 +55,7 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: postgres:12-alpine
+        image: jmr96registry.azurecr.io/postgres:12-alpine
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 5432
@@ -76,8 +76,10 @@ spec:
               name: house-prices-app-config
               key: postgres_db
         volumeMounts:
-          - name: data-storage-volume
-            mountPath: /var/lib/postgresql/data
+          - mountPath: /var/lib/postgresql/data
+            name: data-storage-volume
+            subPath: postgres
+
 #        livenessProbe:
 #          exec:
 #            command:
@@ -140,7 +142,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: flask_api_house_prices_backend:latest
+          image: jmr96registry.azurecr.io/flask_api_house_prices_backend:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5000
@@ -209,7 +211,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: flask_api_house_prices_frontend:latest
+          image: jmr96registry.azurecr.io/flask_api_house_prices_frontend:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 4000
