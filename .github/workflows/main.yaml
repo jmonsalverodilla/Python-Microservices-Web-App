@@ -34,6 +34,20 @@ jobs:
         tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_frontend:${{ github.sha }}
         file: frontend/Dockerfile
 
+#    - name: Build, tag, and push image to registry
+#      env:
+#        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+#        ECR_REPOSITORY: xxxxxxxx-report-api
+#        IMAGE_TAG: latest
+#      working-directory: apis/report-api
+#      run: |
+#        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+#        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
     # Container build and push to a Azure Container Registry (ACR)
 #    - run: |
 #        docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
