@@ -71,7 +71,7 @@ jobs:
     - uses: azure/k8s-deploy@v1
       with:
         manifests: |
-          deployment/deployment.yml
+          deployment/deployment.yaml
         images: |
           ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_frontend:${{ github.sha }}
         imagepullsecrets: |
