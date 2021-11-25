@@ -6,7 +6,6 @@ metadata:
     name: house-prices-app
 
 ---
-
 apiVersion: v1
 kind: ConfigMap
 metadata:
