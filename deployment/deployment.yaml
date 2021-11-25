@@ -212,7 +212,7 @@ spec:
       containers:
         - name: frontend
           image: jmr96registry.azurecr.io/flask_api_house_prices_frontend:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           ports:
             - containerPort: 4000
           env:
