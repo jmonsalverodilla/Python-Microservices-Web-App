@@ -57,24 +57,23 @@ jobs:
         resource-group: demo-rgr
 
 #
-#    # Create image pull secret for ACR
-#    - uses: azure/k8s-create-secret@v1
-#      with:
-#        container-registry-url: ${{ env.REGISTRY_NAME }}.azurecr.io
-#        container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
-#        container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-#        secret-name: ${{ env.SECRET }}
-#        namespace: ${{ env.NAMESPACE }}
-#        force: true
+#    # Create K8S secret to pull image
+    - uses: azure/k8s-create-secret@v1
+      with:
+        container-registry-url: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+        container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+        secret-name: docker-image-pull-secret
+        namespace: house-prices-app
+        force: true
 #
-#    # Deploy app to AKS
-#    - uses: azure/k8s-deploy@v1
-#      with:
-#        manifests: |
-#          manifests/deployment.yml
-#          manifests/service.yml
-#        images: |
-#          ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.APP_NAME }}:${{ github.sha }}
-#        imagepullsecrets: |
-#          ${{ env.SECRET }}
-#        namespace: ${{ env.NAMESPACE }}
+    # Deploy app to AKS
+    - uses: azure/k8s-deploy@v1
+      with:
+        manifests: |
+          deployment/deployment.yml
+        images: |
+          ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_frontend:${{ github.sha }}
+        imagepullsecrets: |
+          docker-image-pull-secret
+        namespace: house-prices-app
