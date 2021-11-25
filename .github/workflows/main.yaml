@@ -29,7 +29,7 @@ jobs:
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
-        context: ./frontend
+        #context: ./frontend
         push: true
         tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_frontend:${{ github.sha }}
         file: ./frontend/Dockerfile
