@@ -42,6 +42,14 @@ jobs:
         docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_frontend:${{ github.sha }} .
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_frontend:${{ github.sha }}
 
+    - name: Build, tag, and push image to registry
+      working-directory: backend
+      run: |
+        docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_backend:${{ github.sha }} .
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_backend:${{ github.sha }}
+
+
+
 
     ############DEPLOY TO AKS#############
     # Set the target Azure Kubernetes Service (AKS) cluster.
