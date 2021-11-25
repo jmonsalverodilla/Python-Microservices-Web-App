@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/jmonsalverodilla/Python-Microservices-Web-App.git
     targetRevision: HEAD
-    path: deployment
+    path: k8s_deployment
   destination:
     server: https://kubernetes.default.svc
     namespace: house-prices-app

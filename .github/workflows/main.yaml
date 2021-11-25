@@ -65,15 +65,15 @@ jobs:
         container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
         secret-name: docker-image-pull-secret
         namespace: house-prices-app
-        force: true
 #
     # Deploy app to AKS
     - uses: azure/k8s-deploy@v1
       with:
         manifests: |
-          deployment/deployment.yaml
+          k8s_deployment/deployment.yaml
         images: |
           ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_frontend:${{ github.sha }}
         imagepullsecrets: |
           docker-image-pull-secret
         namespace: house-prices-app
+        action: deploy

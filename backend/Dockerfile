@@ -14,7 +14,7 @@ COPY . /backend
 #This command is just informative since it does not actually expose any port
 EXPOSE $BACKEND_DOCKER_PORT
 
-#CMD ["python","main.py"] #This is a development server. Do not use it in a production deployment.
+#CMD ["python","main.py"] #This is a development server. Do not use it in a production k8s_deployment.
 #ENTRYPOINT gunicorn --bind 0.0.0.0:$BACKEND_HOST_PORT main:app
 #ENTRYPOINT ["sh", "-c","gunicorn --bind 0.0.0.0:$BACKEND_HOST_PORT main:app"]
 #RUN python create_app.py db upgrade
