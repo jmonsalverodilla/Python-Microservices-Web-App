@@ -55,7 +55,7 @@ spec:
       containers:
       - name: postgres
         image: jmr96registry.azurecr.io/postgres:12-alpine
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
           - containerPort: 5432
         env:
@@ -142,7 +142,7 @@ spec:
       containers:
         - name: backend
           image: jmr96registry.azurecr.io/flask_api_house_prices_backend:latest
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always #IfNotPresent
           ports:
             - containerPort: 5000
           env:
