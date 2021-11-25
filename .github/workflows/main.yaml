@@ -28,33 +28,19 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
 
-    - name: Build and push container image to registry
-      uses: docker/build-push-action@v2
-      with:
-        context: frontend
-        push: true
-        tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_frontend:${{ github.sha }}
-        file: frontend/Dockerfile
+#    - name: Build and push container image to registry
+#      uses: docker/build-push-action@v2
+#      with:
+#        context: frontend
+#        push: true
+#        tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_frontend:${{ github.sha }}
+#        file: frontend/Dockerfile
 
-    - name: Build and push container image to registry
-      uses: docker/build-push-action@v2
-      with:
-        context: backend
-        push: true
-        tags: ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_backend:${{ github.sha }}
-        file: backend/Dockerfile
-
-
-
-#    - name: Build, tag, and push image to registry
-#      env:
-#        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-#        ECR_REPOSITORY: xxxxxxxx-report-api
-#        IMAGE_TAG: latest
-#      working-directory: apis/report-api
-#      run: |
-#        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-#        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    - name: Build, tag, and push image to registry
+      working-directory: frontend
+      run: |
+        docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_frontend:${{ github.sha }} .
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/flask_api_house_prices_frontend:${{ github.sha }}
 
 
     ############DEPLOY TO AKS#############
